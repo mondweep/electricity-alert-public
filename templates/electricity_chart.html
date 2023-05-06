@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Usage Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="chart"></div>  
+    <script>
+        var usage_data = {{ usage_data | tojson | safe }};
+        var data = [
+          {
+            x: usage_data['x'],
+            y: usage_data['y'],
+            type: 'bar'
+          }
+        ];
+        var layout = {
+          title: 'Electricity Usage Chart',
+          xaxis: {
+            title: 'Time'
+          },
+          yaxis: {
+            title: 'Electricity Usage (kWh)'
+          }
+        };
+        Plotly.newPlot('chart', data, layout);
+    </script>
+</body>
+</html>
